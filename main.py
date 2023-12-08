@@ -1,6 +1,6 @@
 # TODOS #
 # Puxar o senhas.txt
-# verificas se files n existem pra criar novos users
+# verificar se files n existem pra criar novos users
 # transforme as strings da senhas em 
 
 import io
