@@ -19,9 +19,26 @@ def compute_sha256_hash(data):
 
     return hash_result
 
+
+
 print("Bem vindo ao Cofre de Senhas Super Simplificado e Seguras (confiável!!!!!)")
-user_login = input("Digite seu nome de usuário (sem letras maiusculas): ")
-user_password = input("Digite sua senha (min 8 caracteres): ")
+
+while True:
+  user_login = input("Digite seu nome de usuário (somente letras minusculas): ")
+  user_password = input("Digite sua senha (min 8 caracteres): ")
+
+  if(user_login.islower() == False):
+    os.system("clear")
+    print("Nome de usuário inválido, tente novamente.")
+    continue
+
+  if(len(user_password) < 8):
+    os.system("clear")
+    print("Senha muito curta, tente novamente.")
+    continue
+
+  break
+  
 
 PUBLIC_KEY_FILE_NAME = "public_key.txt" # valor que vai ajudar pra descriptografar as senhas
 PASSWORDS_FILE_NAME = "senhas.txt" # senhas do cofre
