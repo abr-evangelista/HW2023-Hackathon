@@ -59,6 +59,8 @@ if not os.path.exists(PUBLIC_KEY_FILE_NAME) or not os.path.exists(PASSWORDS_FILE
 
     with open(POP_FILE_NAME, "r+") as f:
         data = f.read().replace('\n', '')
+    
+    with open(PASSWORDS_FILE_NAME, "w") as f:
         f.write(xor_encrypt_decrypt(data, CIPHER_HASH))
        
     print("Criamos seu cofre!!")
@@ -94,7 +96,7 @@ with open(PUBLIC_KEY_FILE_NAME, "r") as f:
        print("Credenciais erradas!")
        exit(1)
 
-with open(POP_FILE_NAME, "r+") as f:
+with open(PASSWORDS_FILE_NAME, "r+") as f:
     data = f.read().replace('\n', '')
     passwords = xor_encrypt_decrypt(data, CIPHER_HASH)
 
