@@ -1,7 +1,5 @@
 # TODOS #
-# Puxar o senhas.txt
-# verificar se files n existem pra criar novos users
-# transforme as strings da senhas em 
+# transforme as strings da senhas em numeros da tabela ascii
 
 import io
 import os
@@ -38,13 +36,16 @@ while True:
     continue
 
   break
-  
 
 PUBLIC_KEY_FILE_NAME = "public_key.txt" # valor que vai ajudar pra descriptografar as senhas
 PASSWORDS_FILE_NAME = "senhas.txt" # senhas do cofre
+POPULATE_FILE_NAME = "popular_senha.txt" # arquivo que vai popular as senhas
 
 public_key_exists = False
 passwords_exists = False
+
+public_keys = []
+passwords = []
 
 # Verifica se o arquivo existe e cria um novo se não existir
 if not os.path.exists(PUBLIC_KEY_FILE_NAME):
@@ -55,8 +56,9 @@ if not os.path.exists(PASSWORDS_FILE_NAME):
   with open(PASSWORDS_FILE_NAME, "w") as f:
     f.write("")
 
-public_keys = []
-passwords = []
+if not os.path.exists(POPULATE_FILE_NAME):
+  with open(POPULATE_FILE_NAME, "w") as f:
+    f.write("")
 
 try:
   with open(PUBLIC_KEY_FILE_NAME, 'r') as file:
@@ -67,12 +69,35 @@ except FileNotFoundError:
 except Exception as e:
     print(f"Ocorreu um erro: {e}")
 
+fake_credentials = [
+    "GOOGLE:\nabc@gmail.com\nsenha123",
+    "AMAZON:\ndef@gmail.com\nabre456",
+    "FACEBOOK:\nghi@gmail.com\n123senha",
+    "TWITTER:\njkl@gmail.com qwerty789",
+    "INSTAGRAM:\nmno@gmail.com p@ssw0rd",
+    "LINKEDIN:\npqr@gmail.com\nlinkedin123",
+    "SNAPCHAT:\nstu@gmail.com\nghost567",
+    "MICROSOFT:\nvwx@gmail.com\nwindows10!",
+    "APPLE:\nyz@gmail.com\napple1234",
+    "YAHOO:\nxyz@gmail.com\nyahoo987"
+]
+
 try:
   with open(PASSWORDS_FILE_NAME, 'r') as file:
     for linha in file:
       passwords.append(linha)
 except FileNotFoundError:
     print(f"Arquivo '{PASSWORDS_FILE_NAME}' não encontrado.")
+except Exception as e:
+    print(f"Ocorreu um erro: {e}")
+
+try:
+  with open(POPULATE_FILE_NAME, 'w') as file:
+    for string in fake_credentials:
+      for linha in string.splitlines():
+         file.write(linha + "\n")
+except FileNotFoundError:
+    print(f"Arquivo '{POPULATE_FILE_NAME}' não encontrado.")
 except Exception as e:
     print(f"Ocorreu um erro: {e}")
 

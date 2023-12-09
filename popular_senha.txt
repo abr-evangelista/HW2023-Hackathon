@@ -1,0 +1,28 @@
+GOOGLE:
+abc@gmail.com
+senha123
+AMAZON:
+def@gmail.com
+abre456
+FACEBOOK:
+ghi@gmail.com
+123senha
+TWITTER:
+jkl@gmail.com qwerty789
+INSTAGRAM:
+mno@gmail.com p@ssw0rd
+LINKEDIN:
+pqr@gmail.com
+linkedin123
+SNAPCHAT:
+stu@gmail.com
+ghost567
+MICROSOFT:
+vwx@gmail.com
+windows10!
+APPLE:
+yz@gmail.com
+apple1234
+YAHOO:
+xyz@gmail.com
+yahoo987
