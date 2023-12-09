@@ -54,6 +54,9 @@ if not os.path.exists(PUBLIC_KEY_FILE_NAME) or not os.path.exists(PASSWORDS_FILE
 
     CIPHER_HASH = XOR(LOGIN_HASH, PASSWORDS_HASH)
 
+    with open(PUBLIC_KEY_FILE_NAME, "w") as f:
+        f.write(PASSWORDS_HASH)
+
     with open(POP_FILE_NAME, "r+") as f:
         data = f.read().replace('\n', '')
         f.write(xor_encrypt_decrypt(data, CIPHER_HASH))
@@ -79,25 +82,20 @@ while True:
   break
 
 public_keys = []
-passwords = []
 
-try:
-  with open(PUBLIC_KEY_FILE_NAME, 'r') as file:
-      for linha in file:
-        public_keys.append(linha)
-except FileNotFoundError:
-  print(f"Arquivo '{PUBLIC_KEY_FILE_NAME}' não encontrado.")
-except Exception as e:
-    print(f"Ocorreu um erro: {e}")
+LOGIN_HASH = compute_sha256_hash(user_login)
+PASSWORDS_HASH = compute_sha256_hash(user_password)
 
-try:
-  with open(PASSWORDS_FILE_NAME, 'r') as file:
-    for linha in file:
-      passwords.append(linha)
-except FileNotFoundError:
-    print(f"Arquivo '{PASSWORDS_FILE_NAME}' não encontrado.")
-except Exception as e:
-    print(f"Ocorreu um erro: {e}")
+CIPHER_HASH = XOR(LOGIN_HASH, PASSWORDS_HASH)
 
-print(public_keys)
+with open(PUBLIC_KEY_FILE_NAME, "w") as f:
+    data = f.read().replace('\n', '')
+    if data != PASSWORDS_HASH:
+       print("Credenciais erradas!")
+       exit(1)
+
+with open(POP_FILE_NAME, "r+") as f:
+    data = f.read().replace('\n', '')
+    passwords = xor_encrypt_decrypt(data, CIPHER_HASH)
+
 print(passwords)
